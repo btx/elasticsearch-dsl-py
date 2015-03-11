@@ -47,6 +47,9 @@ def test_get_with_tz_date(data_client):
 def test_get_with_date_is_none(data_client):
     elasticsearch_repo = Repository.get('elasticsearch-dsl-py')
     elasticsearch_repo.created_at = None
+    elasticsearch_repo.save()
+
+    elasticsearch_repo = Repository.get('elasticsearch-dsl-py')
 
     assert None == elasticsearch_repo.created_at
 
