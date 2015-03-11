@@ -1,5 +1,6 @@
 from datetime import date
 from dateutil import parser
+from types import NoneType
 
 from .utils import DslBase, _make_dsl_class, ObjectBase, AttrDict
 
@@ -88,7 +89,7 @@ class InnerObject(object):
 
     def _to_python(self, data):
         # don't wrap already wrapped data
-        if isinstance(data, self._doc_class):
+        if isinstance(data, (self._doc_class, NoneType)):
             return data
 
         if isinstance(data, list):
@@ -110,7 +111,7 @@ class Date(Field):
     name = 'date'
 
     def _to_python(self, data):
-        if isinstance(data, date):
+        if isinstance(data, (date, NoneType)):
             return data
 
         try:

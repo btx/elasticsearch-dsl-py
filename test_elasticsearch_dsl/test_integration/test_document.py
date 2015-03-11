@@ -44,6 +44,12 @@ def test_get_with_tz_date(data_client):
     tzinfo = timezone('Europe/Prague')
     assert tzinfo.localize(datetime(2014, 5, 2, 13, 47, 19)) == first_commit.authored_date
 
+def test_get_with_date_is_none(data_client):
+    elasticsearch_repo = Repository.get('elasticsearch-dsl-py')
+    elasticsearch_repo.created_at = None
+
+    assert None == elasticsearch_repo.created_at
+
 def test_save_updates_existing_doc(data_client):
     elasticsearch_repo = Repository.get('elasticsearch-dsl-py')
 
